@@ -17,7 +17,9 @@ use Rack::Cors do
     #     :max_age => 600
     #     # headers to expose
     origins '*'
-    resource '*'
+    resource '*',
+      :headers => :any,
+      :methods => [:get, :post, :delete, :put, :options]
   end
 
   allow do
