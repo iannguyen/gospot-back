@@ -5,6 +5,7 @@ class SessionsController < Devise::SessionsController
     super do |user|
       reset_token(user)
       sign_in user
+      current_user = user
       data = { token: user.authentication_token, email: user.email }
       render(json: data, status: 201) && return
     end
