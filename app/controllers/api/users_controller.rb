@@ -4,4 +4,8 @@ class Api::UsersController < ApplicationController
     user = User.includes(:skins).includes(:payouts => :skins).find(current_user.id)
     render json: user
   end
+  def index
+    user = User.includes(:skins).includes(:payouts => :skins).find(current_user.id)
+    render json: user
+  end
 end
