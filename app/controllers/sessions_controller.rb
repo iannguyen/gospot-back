@@ -4,6 +4,7 @@ class SessionsController < Devise::SessionsController
   def create
     super do |user|
       reset_token(user)
+      sign_in user
       data = { token: user.authentication_token, email: user.email }
       render(json: data, status: 201) && return
     end
