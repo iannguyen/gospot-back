@@ -7,27 +7,17 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery :exception
 
   private
-    def authenticate!
-      authenticate_token || render_unauthorized
-    end
 
-    def authenticate_user_from_token!
-      authenticate_with_http_token do |token, options|
-        user_email = options[:user_email].presence
-        user       = user_email && User.find_by_email(user_email)
-        ## /\ Changed User to Business /\
-
-        if user && Devise.secure_compare(user.authentication_token, token)
-          sign_in user, store: false
-        end
+  def authenticate_user_from_token!
+    authenticate_with_http_token do |token, options|
+      user_email = options[:user_email].presence
+      user       = user_email && User.find_by_email(user_email)
+      current_user = user
+      if user && Devise.secure_compare(user.authentication_token, token)
+        sign_in user, store: false
       end
     end
-
-    def render_unauthorized
-      render json: {
-        errors: ['Bad credentials']
-      }, status: 401
-    end
+  end
 
   def reset_token(user)
     user.authentication_token = User.generate_authentication_token
