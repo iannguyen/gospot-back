@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
   namespace 'api' do
     get 'users/current', to: 'users#current'
-    resources :users
     resources :matches
     resources :skins
     resources :bets
