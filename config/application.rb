@@ -21,23 +21,23 @@ module RailsBack
   class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*',
-                 headers: :any,
-                 methods: [:get, :post, :delete, :put, :patch, :options],
-                 credentials: true,
-                 max_age: 0
-      end
-    end
-
-    # config.middleware.insert_before 0, 'Rack::Cors' do
+    # config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
     #   allow do
     #     origins '*'
-    #     resource '*', headers: :any, methods: [:get, :post, :options]
+    #     resource '*',
+    #              headers: :any,
+    #              methods: [:get, :post, :delete, :put, :patch, :options],
+    #              credentials: true,
+    #              max_age: 0
     #   end
     # end
+
+    config.middleware.insert_before 0, 'Rack::Cors' do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options]
+      end
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
