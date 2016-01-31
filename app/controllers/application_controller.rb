@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user_from_token!
-    debugger
+
     authenticate_with_http_token do |token, _options|
       User.find_by(authentication_token: token)
     end
