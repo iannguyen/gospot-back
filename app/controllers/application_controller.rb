@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
 
-  # protect_from_forgery
+  protect_from_forgery
 
   after_filter :set_csrf_cookie
 
