@@ -15,7 +15,7 @@ User.create! email: 'bo@bo.com', password: 'password'
 Team.create! name: "WOW_WE_LAGGED"
 Team.create! name: "php_poets"
 
-Match.create! team_1_id: 1, team_2_id: 2, location: "de_dust2", open: true, start_hour: 20, team_1_score: 16
+Match.create! team_1_id: 1, team_2_id: 2, location: "de_dust2", open: true, start_hour: 20, team_1_score: 0
 
 Skin.create! name: "AK-47: Elite Build", price: 0.77, user_id: 1
 Skin.create! name: "USP-S: Guardian", price: 1.23, user_id: 1

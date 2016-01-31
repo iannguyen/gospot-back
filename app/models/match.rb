@@ -60,6 +60,19 @@ class Match < ActiveRecord::Base
 
   private
 
+  def start!
+    self.open = false
+    save
+    until over?
+      sleep(rand(10))
+      round_winner = rand(2)
+      round_winner.zero? ? self.team_1_score += 1 : self.team_2_score += 1
+      puts "#{team_1.name} #{team_1_score} : #{team_2_score} #{team_2.name}"
+      save
+    end
+    distribute
+  end
+
   def winner_returns
     winners = {}
     multiplier = winner_mulplier
@@ -82,5 +95,12 @@ class Match < ActiveRecord::Base
 
   def destroy_bets!
     Bet.where(match_id: id).destroy_all
+  end
+
+  def reset!
+    self.open = true
+    self.team_1_score = 0
+    self.team_2_score = 0
+    self.save
   end
 end

@@ -1,5 +1,5 @@
 class Api::SkinsController < ApplicationController
-  before_action :authenticate_user!
+  before_filter :sanitize_skin_params, only: [:create]
 
   def index
     render json: Skin.all
@@ -9,17 +9,8 @@ class Api::SkinsController < ApplicationController
   end
 
   def create
-    @skin = current_user.skins.new(skin_params)
+    @skin = Skin.new(skin_params)
     if @skin.save
-      render json: @skin, status: 201
-    else
-      render json: { failures: @skin.errors.full_messages }, status: 422
-    end
-  end
-
-  def update
-    @skin = Skin.find(params[:id])
-    if @skin.update(skin_params)
       render json: @skin, status: 201
     else
       render json: { failures: @skin.errors.full_messages }, status: 422
@@ -36,5 +27,9 @@ class Api::SkinsController < ApplicationController
 
   def skin_params
     params.require(:skin).permit(:name, :price, :user_id)
+  end
+
+  def sanitize_skin_params
+    params[:skin][:user_id] = params[:skin][:user].to_i
   end
 end

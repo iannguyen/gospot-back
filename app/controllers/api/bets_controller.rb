@@ -1,6 +1,4 @@
 class Api::BetsController < ApplicationController
-  before_action :authenticate_user!
-
   def new
   end
 
@@ -13,7 +11,7 @@ class Api::BetsController < ApplicationController
     skin_ids = bet_params[:skin_ids].map(&:to_i)
     skins = Skin.where(id: skin_ids).all
     sum = skins.sum(:price)
-    @bet = current_user.bets.new(bet_params.except('skins'))
+    @bet = Bet.new(bet_params.except('skins'))
     @bet.skins = skins
     if sum >= 10 && @bet.save
       render json: @bet, status: 201

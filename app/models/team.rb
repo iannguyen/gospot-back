@@ -12,6 +12,5 @@ class Team < ActiveRecord::Base
 
   def total
     skins.sum(:price)
-    # skins.inject(0) { |accum, skin| accum + skin.price }.round(2)
   end
 end
