@@ -6,14 +6,12 @@ class ApplicationController < ActionController::Base
   after_filter :set_csrf_cookie
 
   def set_csrf_cookie
-    # debugger
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
   protected
 
   def verified_request?
-    # debugger
     super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
   end
 
