@@ -11,9 +11,10 @@ class Api::BetsController < ApplicationController
     skin_ids = bet_params[:skin_ids].map(&:to_i)
     skins = Skin.where(id: skin_ids).all
     sum = skins.sum(:price)
+    match = Match.find(params[:match_id])
     @bet = Bet.new(bet_params.except('skins'))
     @bet.skins = skins
-    if sum >= 10 && @bet.save
+    if sum >= 10 && match.open && @bet.save
       render json: @bet, status: 201
     elsif sum < 10
       render json: { failures: 'Minimum bet $10' }, status: 422
