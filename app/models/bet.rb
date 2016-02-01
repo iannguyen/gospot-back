@@ -16,4 +16,20 @@ class Bet < ActiveRecord::Base
   def total
     skins.inject(0) { |a, e| a + e.price }.round(2)
   end
+
+  private
+
+  def self.generate_bets!
+    match = Match.first
+
+    users = User.where(id: [(1..16)]).all
+    users.each do |user|
+      user.id <= 8 ? team_num = 1 : team_num = 2
+
+      random_user_skins = Skin.send(:random_skins, user.id)
+
+      bet = user.bets.new(match_id: match.id, team_id: team_num, skins: random_user_skins)
+      bet.save
+    end
+  end
 end
