@@ -9,6 +9,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pry-rails'
 gem 'whenever', require: false
+gem 'rspec-rails'
 
 group :development, :test do
   gem 'byebug'
