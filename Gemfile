@@ -8,6 +8,7 @@ gem 'devise'
 gem 'rack-cors', require: 'rack/cors'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pry-rails'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'byebug'

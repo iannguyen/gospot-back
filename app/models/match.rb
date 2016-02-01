@@ -102,5 +102,6 @@ class Match < ActiveRecord::Base
     self.team_1_score = 0
     self.team_2_score = 0
     self.save
+    destroy_bets!
   end
 end
