@@ -4,9 +4,10 @@ module MatchesHelper
 
     OVERPAY_CONST = 1.10
 
-    def initialize(skins, winners)
+    def initialize(skins, winners, site_rake)
       @skins = skins
       @winners = winners
+      @site_rake = site_rake
       @profits = pull_profits
       @max = @profits.first.round
       @skins_hash = generate_skins_frequency
@@ -14,6 +15,8 @@ module MatchesHelper
     end
 
     def payout!
+      site_profit = cashout(@site_rake)
+      site_profit.each(&:destroy)
       @winners.keys.each_with_index do |user_id, idx|
         user_payout = @winners[user_id][:payout]
         user_profit = cashout(@profits[idx], idx)
@@ -38,7 +41,7 @@ module MatchesHelper
       payout.sort!.reverse!
     end
 
-    def cashout(amount, idx)
+    def cashout(amount, idx = -1)
       success = false
       payment = []
       until success

@@ -1,6 +1,8 @@
 class Match < ActiveRecord::Base
   include MatchesHelper
 
+  RAKE_CONST = 0.05
+
   validates :team_1_id, :team_2_id, :team_1_score, :team_2_score, :team_1_odds,
             :team_2_odds, :location, :start_hour, presence: true
   validates :open, inclusion: { in: [true, false] }
@@ -53,7 +55,8 @@ class Match < ActiveRecord::Base
   def distribute
     winners = winner_returns
     loser_skins = loser.skins.order(:price).reverse_order
-    payout_table = PayoutTable.new(loser_skins, winners)
+    site_rake = loser_skins.sum(:price) * RAKE_CONST
+    payout_table = PayoutTable.new(loser_skins, winners, site_rake)
     payout_table.payout!
     destroy_bets!
   end
@@ -64,7 +67,7 @@ class Match < ActiveRecord::Base
     self.open = false
     save
     until over?
-      sleep(rand(10))
+      sleep(rand(90))
       round_winner = rand(2)
       round_winner.zero? ? self.team_1_score += 1 : self.team_2_score += 1
       puts "#{team_1.name} #{team_1_score} : #{team_2_score} #{team_2.name}"
