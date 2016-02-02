@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   before_filter :authenticate_user_from_token!
 
   # protect_from_forgery
