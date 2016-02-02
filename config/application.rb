@@ -17,6 +17,8 @@ Bundler.require(*Rails.groups)
 
 module RailsBack
   class Application < Rails::Application
+    config.api_only = true
+    
     config.active_record.raise_in_transactional_callbacks = true
 
     # config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
