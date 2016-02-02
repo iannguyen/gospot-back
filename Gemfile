@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'rails-api'
 gem 'pg'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'active_model_serializers'
