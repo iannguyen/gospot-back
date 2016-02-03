@@ -26,7 +26,8 @@ class Api::SkinsController < ApplicationController
         skin.save
       end
     end
-    @skin.destroy!
+    @skin.destroy
+    @payout.destroy
     render json: @skin, status: 201
   end
 
