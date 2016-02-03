@@ -19,6 +19,13 @@ class Api::SkinsController < ApplicationController
 
   def destroy
     @skin = Skin.find(params[:id])
+    if @skin.payout_id
+      assoc_skins = Skin.where(payout_id: @skin.payout_id).all
+      assoc_skins.each do |skin|
+        skin.payout_id = nil
+        skin.save
+      end
+    end
     @skin.destroy
     render json: @skin, status: 201
   end
