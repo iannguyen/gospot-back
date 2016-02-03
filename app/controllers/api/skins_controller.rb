@@ -19,15 +19,7 @@ class Api::SkinsController < ApplicationController
 
   def destroy
     @skin = Skin.find(params[:id])
-    @payout = Payout.find(skin.payout_id)
-    if @payout
-      @payout.skins.each do |skin|
-        skin.payout_id = nil
-        skin.save
-      end
-    end
     @skin.destroy
-    @payout.destroy
     render json: @skin, status: 201
   end
 
