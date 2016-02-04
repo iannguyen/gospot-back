@@ -1,4 +1,4 @@
-module MatchesHelper
+module BinpackHelper
   class PayoutTable
     attr_reader :skins, :profits, :max, :skins_hash, :winners, :bp_table
 

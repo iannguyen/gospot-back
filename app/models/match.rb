@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-  include MatchesHelper
+  include BinpackHelper
 
   RAKE_CONST = 0.05
 
