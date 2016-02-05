@@ -26,5 +26,8 @@ User.create! email: 'friberg@friberg.com', password: 'lalalala'
 
 Team.create! name: "WOW_WE_LAGGED"
 Team.create! name: "php_poets"
+Team.create! name: "Ruby_Rushers"
+Team.create! name: "da_pythons"
 
 Match.create! team_1_id: 1, team_2_id: 2, location: "de_dust2", open: true, start_hour: 20
+Match.create! team_1_id: 3, team_2_id: 4, location: "de_inferno", open: true, start_hour: 16

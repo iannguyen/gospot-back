@@ -20,16 +20,18 @@ class Bet < ActiveRecord::Base
   private
 
   def self.generate_bets!
-    match = Match.first
-
+    matches = Match.all
     users = User.where(id: [(1..16)]).all
-    users.each do |user|
-      user.id <= 8 ? team_num = 1 : team_num = 2
 
-      random_user_skins = Skin.send(:random_skins, user.id)
+    matches.each do |match|
+      users.each do |user|
+        user.id <= 8 ? team_num = match.team_1_id : team_num = match.team_2_id
 
-      bet = user.bets.new(match_id: match.id, team_id: team_num, skins: random_user_skins)
-      bet.save
+        random_user_skins = Skin.send(:random_skins, user.id)
+
+        bet = user.bets.new(match_id: match.id, team_id: team_num, skins: random_user_skins)
+        bet.save
+      end
     end
   end
 end
