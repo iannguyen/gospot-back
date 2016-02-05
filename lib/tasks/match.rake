@@ -4,7 +4,6 @@ task start_matches: :environment do
 
   sleep(30)
   pst_hour = (Time.now.utc.hour + 12) % 24
-  pst_hour = 20
   matches = Match.where(start_hour: pst_hour).all
   matches.each do |match|
     if match.start_hour == pst_hour
