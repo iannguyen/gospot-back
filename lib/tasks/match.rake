@@ -1,6 +1,6 @@
 desc 'Start the matches and payout'
 
-task start_match: :environment do
+task start_matches: :environment do
 
   sleep(30)
   pst_hour = (Time.now.utc.hour + 12) % 24
@@ -16,7 +16,7 @@ end
 
 desc 'Reset the matches and clear bets'
 
-task reset_match: :environment do
+task reset_matches: :environment do
 
   matches = Match.all
   matches.each { |match| match.send(:reset!) }
