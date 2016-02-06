@@ -15,7 +15,7 @@ class Skin < ActiveRecord::Base
       Skin.new(name: 'M4A4: Desert Strike', price: 4.00, user_id: user_id),
       Skin.new(name: 'AWP: Worm God', price: 5.00, user_id: user_id),
       Skin.new(name: 'M4A1-S: Hyper Beast', price: 9.51, user_id: user_id),
-      Skin.new(name: 'Karmabit: Marble Fade', price: 500, user_id: user_id)
+      Skin.new(name: 'Desert Eagle: Blaze', price: 16.12, user_id: user_id)
     ]
 
     10.times do
