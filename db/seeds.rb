@@ -24,6 +24,17 @@ User.create! email: 'me@me.com', password: 'lalalala'
 User.create! email: 'bane@bane.com', password: 'lalalala'
 User.create! email: 'friberg@friberg.com', password: 'lalalala'
 
+User.create! email: 'guest1@gospot.com', password: 'lalalala'
+User.create! email: 'guest2@gospot.com', password: 'lalalala'
+User.create! email: 'guest3@gospot.com', password: 'lalalala'
+User.create! email: 'guest4@gospot.com', password: 'lalalala'
+User.create! email: 'guest5@gospot.com', password: 'lalalala'
+User.create! email: 'guest6@gospot.com', password: 'lalalala'
+User.create! email: 'guest7@gospot.com', password: 'lalalala'
+User.create! email: 'guest8@gospot.com', password: 'lalalala'
+User.create! email: 'guest9@gospot.com', password: 'lalalala'
+User.create! email: 'guest10@gospot.com', password: 'lalalala'
+
 Team.create! name: "WOW_WE_LAGGED"
 Team.create! name: "php_poets"
 Team.create! name: "Ruby_Rushers"
