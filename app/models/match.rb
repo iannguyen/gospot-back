@@ -5,7 +5,6 @@ class Match < ActiveRecord::Base
 
   validates :team_1_id, :team_2_id, :team_1_score, :team_2_score, :team_1_odds,
             :team_2_odds, :location, :start_hour, presence: true
-  validates :open, inclusion: { in: [true, false] }
   validates :team_1_score, :team_2_score, inclusion: { in: (0..16).to_a }
 
   belongs_to :team_1, class_name: 'Team', foreign_key: 'team_1_id'
@@ -64,8 +63,6 @@ class Match < ActiveRecord::Base
   private
 
   def start!
-    self.open = false
-    save
     until over?
       sleep(rand(90))
       round_winner = rand(2)
@@ -101,7 +98,6 @@ class Match < ActiveRecord::Base
   end
 
   def reset!
-    self.open = true
     self.team_1_score = 0
     self.team_2_score = 0
     self.save
