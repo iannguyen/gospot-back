@@ -57,7 +57,6 @@ class Match < ActiveRecord::Base
     site_rake = total * RAKE_CONST
     payout_table = PayoutTable.new(loser_skins, winners, site_rake)
     payout_table.payout!
-    destroy_bets!
   end
 
   private
