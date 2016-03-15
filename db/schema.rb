@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206210003) do
+ActiveRecord::Schema.define(version: 20160315052335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,16 +29,18 @@ ActiveRecord::Schema.define(version: 20160206210003) do
   add_index "bets", ["user_id"], name: "index_bets_on_user_id", using: :btree
 
   create_table "matches", force: :cascade do |t|
-    t.string   "location",                 null: false
-    t.integer  "team_1_id",                null: false
-    t.integer  "team_2_id",                null: false
-    t.integer  "team_1_score", default: 0, null: false
-    t.integer  "team_2_score", default: 0, null: false
-    t.integer  "team_1_odds",  default: 0, null: false
-    t.integer  "team_2_odds",  default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "start_hour",               null: false
+    t.string   "location",                      null: false
+    t.integer  "team_1_id",                     null: false
+    t.integer  "team_2_id",                     null: false
+    t.integer  "team_1_score",      default: 0, null: false
+    t.integer  "team_2_score",      default: 0, null: false
+    t.integer  "team_1_odds",       default: 0, null: false
+    t.integer  "team_2_odds",       default: 0, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "start_hour",                    null: false
+    t.float    "final_team_1_odds"
+    t.float    "final_team_2_odds"
   end
 
   add_index "matches", ["team_1_id"], name: "index_matches_on_team_1_id", using: :btree

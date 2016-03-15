@@ -43,7 +43,7 @@ class Match < ActiveRecord::Base
 
   def team_1_odds
     return final_team_1_odds if over?
-    (team_1.total / total).to_f.round(2)
+    @team_1_odds ||= (team_1.total / total).to_f.round(2)
   end
 
   def team_2_odds
@@ -78,10 +78,10 @@ class Match < ActiveRecord::Base
     winners = {}
     multiplier = winner_mulplier
     winning_team_bets = Bet.includes(:skins)
-                        .includes(:team)
-                        .includes(:user)
-                        .where(team_id: winner.id)
-                        .sort_by(&:total).reverse!
+                           .includes(:team)
+                           .includes(:user)
+                           .where(team_id: winner.id)
+                           .sort_by(&:total).reverse!
 
     winning_team_bets.each do |bet|
       returned_payout = bet.user.payouts.new(skins: bet.skins)
@@ -101,11 +101,14 @@ class Match < ActiveRecord::Base
   def reset!
     self.team_1_score = 0
     self.team_2_score = 0
+    self.final_team_1_odds = nil
+    self.final_team_2_odds = nil
     save
   end
 
   def save_odds
     self.final_team_1_odds = team_1_odds
     self.final_team_2_odds = team_2_odds
+    save
   end
 end
