@@ -42,12 +42,12 @@ class Match < ActiveRecord::Base
   end
 
   def team_1_odds
-    return 0 if total.zero?
+    return final_team_1_odds if over?
     (team_1.total / total).to_f.round(2)
   end
 
   def team_2_odds
-    return 0 if total.zero?
+    return final_team_2_odds if over?
     (team_2.total / total).to_f.round(2)
   end
 
@@ -70,6 +70,7 @@ class Match < ActiveRecord::Base
       puts "#{team_1.name} #{team_1_score} : #{team_2_score} #{team_2.name}"
       save
     end
+    save_odds
     distribute
   end
 
@@ -100,6 +101,11 @@ class Match < ActiveRecord::Base
   def reset!
     self.team_1_score = 0
     self.team_2_score = 0
-    self.save
+    save
+  end
+
+  def save_odds
+    self.final_team_1_odds = team_1_odds
+    self.final_team_2_odds = team_2_odds
   end
 end
