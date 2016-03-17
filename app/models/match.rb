@@ -42,13 +42,13 @@ class Match < ActiveRecord::Base
   end
 
   def team_1_odds
-    return final_team_1_odds if over?
+    return final_team_1_odds if final_team_1_odds
     return 0 if total.zero?
     (team_1.total / total).to_f.round(2)
   end
 
   def team_2_odds
-    return final_team_2_odds if over?
+    return final_team_2_odds if final_team_2_odds
     return 0 if total.zero?
     (team_2.total / total).to_f.round(2)
   end
@@ -111,6 +111,7 @@ class Match < ActiveRecord::Base
   def save_odds
     self.final_team_1_odds = team_1_odds
     self.final_team_2_odds = team_2_odds
+    debugger
     save
   end
 end
