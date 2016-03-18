@@ -111,7 +111,6 @@ class Match < ActiveRecord::Base
   def save_odds
     self.final_team_1_odds = team_1_odds
     self.final_team_2_odds = team_2_odds
-    debugger
     save
   end
 end
