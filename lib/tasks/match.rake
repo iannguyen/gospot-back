@@ -6,7 +6,9 @@ task start_matches: :environment do
   pst_hour = (utc_hour - 8) % 24
   pst_hour += 1 if Time.now.dst?
   matches = Match.where(start_hour: pst_hour).all
-  debugger
+  puts Time.now
+  puts utc_hour
+  puts pst_hour
   matches.each do |match|
     puts "MATCH STARTED:: PST_HOUR - #{pst_hour} : START_HOUR - #{match.start_hour}"
     match.send(:start!)
