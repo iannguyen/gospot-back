@@ -3,8 +3,8 @@ desc 'Start the matches and payout'
 task start_matches: :environment do
   sleep(15)
   utc_hour = Time.now.utc.hour
-  utc_hour += 1 if Time.now.dst?
   pst_hour = (utc_hour - 8) % 24
+  pst_hour += 1 if Time.now.dst?
   matches = Match.where(start_hour: pst_hour).all
   matches.each do |match|
     puts "MATCH STARTED:: PST_HOUR - #{pst_hour} : START_HOUR - #{match.start_hour}"
