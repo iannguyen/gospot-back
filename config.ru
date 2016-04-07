@@ -7,7 +7,7 @@ require 'rack/cors'
 
 use Rack::Cors do
   allow do
-    origins '*'
+    origins 'localhost:3000, http://thegospot.herokuapp.com'
     resource '*',
              headers: :any,
              methods: [:get, :post, :delete, :put, :patch, :options]
